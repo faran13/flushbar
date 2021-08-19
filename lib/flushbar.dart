@@ -324,7 +324,8 @@ class _FlushbarState<K extends Object?> extends State<Flushbar>
   void dispose() {
     _fadeController?.dispose();
 
-    widget.progressIndicatorController?.removeListener(_progressListener as void Function());
+    widget.progressIndicatorController
+        ?.removeListener(_progressListener as void Function());
     widget.progressIndicatorController?.dispose();
 
     _focusAttachment.detach();
@@ -623,7 +624,9 @@ class _FlushbarState<K extends Object?> extends State<Flushbar>
                   right: 8.0,
                   bottom: widget.padding.bottom,
                 ),
-                child: widget.messageText ?? _getDefaultNotificationText(),
+                child: widget.messageText != null
+                    ? _getDefaultNotificationText()
+                    : SizedBox.shrink(),
               ),
             ],
           ),
